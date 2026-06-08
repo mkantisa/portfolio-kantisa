@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Blog Kantisa</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="js/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{display:['PT Sans','sans-serif'],body:['DM Sans','sans-serif']},colors:{accent:'#866c68','accent-light':'#FF8F5C'}}}}
+  </script>
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-body antialiased">
+
+  <!-- Reading progress bar -->
+  <div class="progress-bar" :style="`width:${progress}%`" role="progressbar" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+  <!-- NAV -->
+  <header class="fixed top-0.5 left-0 right-0 z-50 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white">kan</span><span class="text-accent">tisa</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium" role="list">
+        <li><a href="index.html#services" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a></li>
+        <li><a href="about.html" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a></li>
+        <li><a href="blog.html" class="nav-link text-accent font-medium">Blog</a></li>
+        <li><a href="contact.html" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button @click="dark=!dark" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        </button>
+        <a href="contact.html" class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Contact me →</a>
+        <button @click="mobileMenu=!mobileMenu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" aria-label="Toggle menu">
+          <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium" role="list">
+        <li><a href="index.html#services" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Home</a></li>
+        <li><a href="about.html" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">About</a></li>
+        <li><a href="blog.html" class="block text-accent font-medium">Blog</a></li>
+        <li><a href="contact.html" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ARTICLE HEADER -->
+    <article>
+      <header class="pt-32 pb-12 max-w-3xl mx-auto px-6">
+<a href="blogmenu.html" class="inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors mb-8">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+  </svg>
+  Back to blog
+</a>
+
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">Design</span>
+          <span class="text-xs text-zinc-400">Jun 1, 2026 · 7 min read</span>
+        </div>
+
+        <h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">Building My Portfolio & MediPickup Appointment System Project</h1>
+
+        <p class="text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">This blog shares my learning journey in web development where I built a personal portfolio website and a MediPickup appointment system project using HTML, CSS, JavaScript, and Tailwind CSS. The project helped me understand real-world website structure, user experience design, and basic system functionality.</p>
+
+        <!-- Author -->
+        <div class="flex items-center gap-4 py-6 border-t border-b border-zinc-100 dark:border-zinc-900">
+          <div class="photo-frame w-12 h-12 rounded-full shrink-0">
+            <img src="images/kantisamiss.JPG" alt="Kantisa" loading="lazy">
+          </div>
+          <div>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">Miss Kantisa</p>
+            <p class="text-xs text-zinc-500">Student Developer | UI/UX & Web Design Learner</p>
+          </div>
+          <div class="ml-auto flex gap-3">
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero image -->
+      <div class="max-w-4xl mx-auto px-6 mb-12">
+        <div class="photo-frame w-full h-72 md:h-96 rounded-2xl">
+          <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=1200&q=80" alt="Code editor with CSS" loading="lazy"/>
+        </div>
+      </div>
+
+<!-- Article content -->
+<div class="max-w-3xl mx-auto px-6 pb-16 prose-article">
+
+  <h2>Building My Portfolio and Applying Skills Through MediPickup</h2>
+  <p>
+    This project represents my journey in web development where I combined what I learned from HTML, CSS, JavaScript, and Tailwind CSS to build both a personal portfolio website and a functional system called MediPickup.
+  </p>
+  <p>
+    MediPickup is a web-based medication pickup appointment system developed as my individual project during Semester 3. The system was designed to help users schedule medication pickup appointments in a more organised and efficient way.
+  </p>
+  <p>
+    Through this project, I was able to apply my knowledge in a real use-case scenario rather than just building static web pages.
+  </p>
+
+  <hr/>
+
+  <h2>About the MediPickup System</h2>
+  <p>
+    In real healthcare environments, patients often need to queue or manually arrange medication pickup schedules. MediPickup was created to improve this process by providing a simple digital appointment system.
+  </p>
+  <p>
+    The main purpose of the system is to allow users to book, view, and manage their medication pickup appointments easily through a web interface.
+  </p>
+  <p>
+    This helped me understand how a real-world system is structured and how frontend design supports user experience.
+  </p>
+
+  <hr/>
+
+  <h2>Key Features Implemented</h2>
+  <p>The MediPickup system includes several important features such as:</p>
+  <ul>
+    <li>Medication pickup appointment booking system</li>
+    <li>Viewing and managing appointment details</li>
+    <li>Simple and user-friendly interface design</li>
+    <li>Basic CRUD flow (Create, Read, Update, Delete concept)</li>
+  </ul>
+  <p>
+    Even though it is a beginner-level system, it reflects real application logic and user flow.
+  </p>
+
+  <hr/>
+
+  <h2>What I Learned from This Project</h2>
+  <p>
+    This project gave me hands-on experience in combining design and development skills.
+  </p>
+
+  <p>I improved my understanding of:</p>
+  <ul>
+    <li>HTML structure and semantic layout</li>
+    <li>CSS styling and responsive design using Tailwind CSS</li>
+    <li>JavaScript for basic interactivity</li>
+    <li>UI/UX principles for better user experience</li>
+    <li>Organising projects using GitHub and version control basics</li>
+  </ul>
+
+  <p>
+    It also helped me understand how frontend development plays an important role in building usable systems.
+  </p>
+
+  <hr/>
+
+  <h2>Personal Portfolio Development</h2>
+  <p>
+    Alongside MediPickup, I also developed my personal portfolio website. This helped me move away from template-based design and understand how to build layouts from scratch.
+  </p>
+  <p>
+    By doing this, I gained better control over structure, styling, and responsiveness of a website.
+  </p>
+  <p>
+    It also improved my confidence in designing clean and modern interfaces.
+  </p>
+
+  <hr/>
+
+  <h2>Challenges and Improvements</h2>
+  <p>
+    During this process, I faced challenges in understanding how different sections of a website interact and how to organise code properly.
+  </p>
+  <p>However, through continuous practice, I improved in:</p>
+
+  <ul>
+    <li>Writing cleaner and structured code</li>
+    <li>Designing responsive layouts</li>
+    <li>Understanding user flow in a system</li>
+    <li>Improving visual consistency across pages</li>
+  </ul>
+
+  <hr/>
+
+  <h2>Conclusion</h2>
+  <p>
+    Overall, this project was an important milestone in my learning journey. MediPickup allowed me to apply technical skills to a real-world inspired system, while my portfolio website helped me understand design and structure more deeply.
+  </p>
+  <p>
+    It strengthened my foundation in web development and motivated me to continue improving in both frontend development and UI/UX design.
+  </p>
+
+  <hr/>
+</div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<footer class="border-t border-zinc-100 dark:border-zinc-900">
+  <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-zinc-400">© <span id="yr"></span> MissKantisa. All rights reserved.</p>
+  </div>
+</footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} });
+    },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
+
+</body>
+</html>

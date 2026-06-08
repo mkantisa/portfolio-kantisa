@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Blog Kantisa</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+<script src="js/script.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+  <script>
+    tailwind.config={darkMode:'class',theme:{extend:{fontFamily:{display:['PT Sans','sans-serif'],body:['DM Sans','sans-serif']},colors:{accent:'#866c68','accent-light':'#FF8F5C'}}}}
+  </script>
+</head>
+<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 font-body antialiased">
+
+  <!-- Reading progress bar -->
+  <div class="progress-bar" :style="`width:${progress}%`" role="progressbar" :aria-valuenow="progress" aria-valuemin="0" aria-valuemax="100" aria-label="Reading progress"></div>
+
+  <!-- NAV -->
+  <header class="fixed top-0.5 left-0 right-0 z-50 transition-all duration-300"
+    :class="scrolled?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':'bg-transparent'">
+    <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+      <a href="index.html" class="font-display font-bold text-xl tracking-tight z-10">
+        <span class="text-zinc-900 dark:text-white">kan</span><span class="text-accent">tisa</span>
+      </a>
+      <ul class="hidden md:flex items-center gap-8 text-sm font-medium" role="list">
+        <li><a href="index.html#services" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Home</a></li>
+        <li><a href="about.html" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">About</a></li>
+        <li><a href="blog3.html" class="nav-link text-accent font-medium">Blog</a></li>
+        <li><a href="contact.html" class="nav-link text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">Contact</a></li>
+      </ul>
+      <div class="flex items-center gap-3">
+        <button @click="dark=!dark" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors" :aria-label="dark?'Light mode':'Dark mode'">
+          <svg x-show="!dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+          <svg x-show="dark" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
+        </button>
+        <a href="contact.html" class="hidden md:inline-flex items-center gap-2 btn-primary bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">Contact me →</a>
+        <button @click="mobileMenu=!mobileMenu" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" aria-label="Toggle menu">
+          <svg x-show="!mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+          <svg x-show="mobileMenu" xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+    </nav>
+    <div x-show="mobileMenu" x-cloak x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0" x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2" class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
+      <ul class="flex flex-col px-6 py-4 gap-4 text-sm font-medium" role="list">
+        <li><a href="index.html#services" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Home</a></li>
+        <li><a href="about.html" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">About</a></li>
+        <li><a href="blog3.html" class="block text-accent font-medium">Blog</a></li>
+        <li><a href="contact.html" @click="mobileMenu=false" class="block text-zinc-700 dark:text-zinc-300">Contact</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ARTICLE HEADER -->
+    <article>
+      <header class="pt-32 pb-12 max-w-3xl mx-auto px-6">
+<a href="blogmenu.html" class="inline-flex items-center gap-2 text-sm text-zinc-500 dark:text-zinc-400 hover:text-accent transition-colors mb-8">
+  <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16l-4-4m0 0l4-4m-4 4h18"/>
+  </svg>
+  Back to blog
+</a>
+
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-xs bg-orange-50 dark:bg-zinc-800 text-accent border border-orange-200 dark:border-zinc-700 px-2.5 py-1 rounded-full">Dev</span>
+          <span class="text-xs text-zinc-400">March 14, 2026 · 5 min read</span>
+        </div>
+
+<h1 class="font-display font-bold text-4xl md:text-5xl text-zinc-900 dark:text-white leading-tight mb-6">
+  Developing StudyLog: My Final Year Project Journey
+</h1>
+
+<p class="text-xl text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">
+  This article shares my experience developing StudyLog, a web-based study management system created as my Final Year Project. The project focuses on helping students organise academic tasks, track study progress, and manage learning activities through a simple and user-friendly platform.
+</p>
+
+<p class="text-lg text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">
+  From requirement analysis and system design to implementation and testing, StudyLog has given me valuable experience in developing a more complete and structured web application while applying the knowledge gained throughout my degree programme.
+</p>
+
+        <!-- Author -->
+        <div class="flex items-center gap-4 py-6 border-t border-b border-zinc-100 dark:border-zinc-900">
+          <div class="photo-frame w-12 h-12 rounded-full shrink-0">
+            <img src="images/kantisamiss.JPG" alt="Kantisa" loading="lazy">
+          </div>
+          <div>
+            <p class="font-medium text-zinc-900 dark:text-white text-sm">Miss Kantisa</p>
+            <p class="text-xs text-zinc-500">Student Developer | UI/UX & Web Design Learner</p>
+          </div>
+          <div class="ml-auto flex gap-3">
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero image -->
+      <div class="max-w-4xl mx-auto px-6 mb-12">
+        <div class="photo-frame w-full h-72 md:h-96 rounded-2xl">
+ <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=700&q=80" alt="Freelance lessons" loading="lazy">
+        </div>
+      </div>
+
+<!-- Article content -->
+<div class="max-w-3xl mx-auto px-6 pb-16 prose-article">
+
+  <h2>Developing StudyLog: My Final Year Project Journey</h2>
+
+<p>
+  StudyLog is my Final Year Project (FYP), developed to help students manage their academic activities in a more organised and structured way. The idea came from a common problem faced by many students — managing assignments, study schedules, deadlines, and personal learning progress across multiple subjects at the same time.
+</p>
+
+<p>
+  Unlike my previous projects, StudyLog required a more complete development process involving system analysis, requirement gathering, design documentation, implementation, testing, and evaluation. This project allowed me to apply the knowledge and skills I have gained throughout my degree programme into a single integrated system.
+</p>
+
+<hr/>
+
+<h2>Identifying the Problem</h2>
+
+<p>
+  Many students rely on notebooks, messaging applications, or multiple productivity tools to manage their academic work. As a result, important tasks and deadlines can sometimes be overlooked.
+</p>
+
+<p>
+  The objective of StudyLog is to provide a centralised platform where students can record study activities, manage tasks, monitor progress, and organise academic information more efficiently.
+</p>
+
+<p>
+  Before development began, I conducted research on existing study management applications and identified several features that could improve the overall learning experience for students.
+</p>
+
+<hr/>
+
+<h2>System Analysis and Design</h2>
+
+<p>
+  One of the most important stages of this project was the planning and analysis phase. Before writing any code, I prepared various system design documents to understand how the application should function.
+</p>
+
+<p>
+  These included Use Case Diagrams, Data Flow Diagrams (DFD), Entity Relationship Diagrams (ERD), system flowcharts, and functional requirements documentation. Creating these diagrams helped me visualise the entire system structure and identify relationships between different modules.
+</p>
+
+<p>
+  Through this process, I gained a better understanding of how software projects are planned before development begins.
+</p>
+
+<hr/>
+
+<h2>Designing the Database Structure</h2>
+
+<p>
+  After completing the analysis phase, I designed the database structure that would support the system. Since StudyLog manages multiple types of information, careful database planning was necessary to ensure that data could be stored and retrieved efficiently.
+</p>
+
+<p>
+  The database includes modules related to user accounts, study records, tasks, deadlines, progress tracking, and activity logs. Relationships between tables were designed to maintain data integrity while supporting future system expansion.
+</p>
+
+<p>
+  This stage strengthened my understanding of relational database concepts and database normalisation techniques.
+</p>
+
+<hr/>
+
+<h2>System Development</h2>
+
+<p>
+  Once the planning and database design were completed, development of the system began. The focus was on creating a clean, user-friendly interface while ensuring that the core functionality worked efficiently.
+</p>
+
+<p>
+  Several key features were implemented, including task management, study activity recording, progress tracking, and user account management. The system was designed to allow students to monitor their academic responsibilities in a single platform.
+</p>
+
+<p>
+  Throughout development, I continuously improved the interface design to make navigation simple and intuitive for users.
+</p>
+
+<hr/>
+
+<h2>Challenges During Development</h2>
+
+<p>
+  Developing StudyLog presented several challenges. One of the main difficulties was ensuring that all modules worked together smoothly while maintaining a structured system architecture.
+</p>
+
+<p>
+  Managing database relationships, implementing CRUD operations, and ensuring data consistency required careful attention throughout the development process.
+</p>
+
+<p>
+  Another challenge was balancing functionality and usability. While adding more features could increase system capabilities, it was equally important to keep the interface simple and easy to use.
+</p>
+
+<hr/>
+
+<h2>Skills and Knowledge Gained</h2>
+
+<p>
+  This project significantly improved both my technical and problem-solving abilities. Through the development of StudyLog, I gained valuable experience in:
+</p>
+
+<ul>
+  <li>System analysis and requirement gathering</li>
+  <li>Use Case Diagram, DFD, and ERD design</li>
+  <li>Database design and management</li>
+  <li>Frontend interface development</li>
+  <li>CRUD implementation and system functionality</li>
+  <li>Testing and debugging processes</li>
+  <li>UI/UX design principles</li>
+  <li>Project planning and documentation</li>
+</ul>
+
+<p>
+  More importantly, the project taught me how to approach software development in a structured and professional manner.
+</p>
+
+<hr/>
+
+<h2>Final Reflection</h2>
+
+<p>
+  StudyLog represents one of the most significant projects in my academic journey. It combines system analysis, design, development, and problem-solving into a single application that addresses a practical issue faced by students.
+</p>
+
+<p>
+  Through this Final Year Project, I have gained a deeper understanding of the software development lifecycle and strengthened my confidence in building complete web-based systems. The experience has also motivated me to continue improving my technical skills and explore more advanced technologies in the future.
+</p>
+
+<hr/>
+
+<p>
+  Looking back, StudyLog is more than just a university project. It reflects my growth as a student developer and demonstrates how the knowledge gained throughout my studies can be applied to create practical solutions for real users.
+</p>
+</div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<footer class="border-t border-zinc-100 dark:border-zinc-900">
+  <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-sm text-zinc-400">© <span id="yr"></span> MissKantisa. All rights reserved.</p>
+  </div>
+</footer>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');observer.unobserve(e.target);} });
+    },{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+    document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+  </script>
+
+</body>
+</html>
