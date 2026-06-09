@@ -1,35 +1,59 @@
-# Personal Web Development Project
+# Personal Blog Portfolio
 
-## Project Overview
-This project is a personal website developed as part of a web development assignment. It includes a portfolio-style layout and a blog section to demonstrate understanding of HTML, CSS, JavaScript, and responsive web design.
+## Description
+This project is a personal blog website developed as part of a web development assignment. The purpose of this project is to demonstrate understanding of basic front-end development, UI/UX design, and responsive web design.
 
-## Pages Included
-- Home Page  
-- About Page  
-- Blog Page (with sample posts)  
-- Contact Page  
+The website allows users to view blog posts, read full articles, and navigate through different sections such as Home, About, Blog, and Contact. It is designed with a clean and modern interface to improve user experience.
+
+---
+
+## Features
+- Home page with personal introduction
+- About page describing background and learning journey
+- Blog page with 2–3 sample blog posts
+- Blog article detail page
+- Contact section with form layout
+- Responsive design for mobile and desktop
+- Dark mode interface
+- Smooth navigation between pages
+
+---
 
 ## Technologies Used
 - HTML
-- CSS / Tailwind CSS  
-- JavaScript  
+- CSS
+- Tailwind CSS
+- JavaScript (basic interactions such as dark mode / animation)
+- Visual Studio Code
+- Git & GitHub for version control
 
-## Tools Used
-- Visual Studio Code  
-- GitHub  
+---
 
-## Features
-- Responsive design for mobile and desktop  
-- Clean and modern UI layout  
-- Blog section with sample articles  
-- Basic JavaScript interaction (dark mode / navigation)  
+## Screenshots
 
-## Learning Outcome
-Through this project, I learned how to structure a complete website, improve UI/UX design, and apply frontend development skills in a real project environment.
+### Home Page
+![Home Page](images/home.png)
 
-## Author
-Miss Kantisa (Student)
+### About Page
+![About Page](images/about.png)
 
-## Note
-This project is created for academic purposes.
-Individual Project: GitHub Portfolio (Personal Blog Page) - Kantisa
+### Blog Page
+![Blog Page](images/blog.png)
+
+### Blog Article Page
+![Article Page](images/article.png)
+
+### Contact Page
+![Contact Page](images/contact.png)
+
+---
+
+## How to Run the Project
+
+1. Clone this repository:
+```bash
+git clone https://github.com/yourusername/your-repo-name.git
+
+---
+
+## How to Run the Project 
