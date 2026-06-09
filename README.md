@@ -52,8 +52,8 @@ The website allows users to view blog posts, read full articles, and navigate th
 
 1. Clone this repository:
 ```bash
-git clone https://github.com/yourusername/your-repo-name.git
+git clone https://mkantisa.github.io/portfolio-kantisa/
 
 ---
 
-## How to Run the Project 
+## Demo Link
