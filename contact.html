@@ -1,172 +1,212 @@
 <!DOCTYPE html>
-<html lang="en" x-data="app()" :class="{'dark':dark}" class="scroll-smooth">
+<html lang="en" x-data="contactApp()" class="scroll-smooth">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Personal Blog Kantisa</title>
+<title>Student Portfolio | Contact</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
-<script src="js/script.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
-
 
 <script>
 tailwind.config = {
-  darkMode: 'class',
   theme: {
     extend: {
-      fontFamily: { display: ['PT Sans','sans-serif'], body: ['DM Sans','sans-serif'] },
-      colors: { accent: '#866c68', 'accent-light': '#FF8F5C' }
+      colors: {
+        accent: '#3B82F6',
+        accent2: '#64748B'
+      },
+      fontFamily: {
+        body: ['DM Sans','sans-serif']
+      }
     }
   }
 }
 </script>
 
-<link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="bg-white dark:bg-zinc-950 text-zinc-900 dark:text-zinc-100 antialiased">
+<body class="bg-slate-50 text-slate-800 font-body">
 
-<!-- ═══ NAV ═══ -->
-<header class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
-  :class="sc?'bg-white/90 dark:bg-zinc-950/90 backdrop-blur-md shadow-sm shadow-black/5':''">
-  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between" aria-label="Main navigation">
+<!-- NAV -->
+<header class="fixed top-0 w-full bg-white/80 backdrop-blur border-b border-slate-200 z-50">
+  <div class="max-w-6xl mx-auto px-6 h-16 flex justify-between items-center">
 
-    <a href="#hero" class="font-display font-bold text-xl tracking-tight relative z-10">
-      <span class="text-zinc-900 dark:text-white">kan</span><span class="text-accent">tisa</span>
-    </a>
+    <h1 class="font-bold text-lg">
+      Student<span class="text-accent">Portfolio</span>
+    </h1>
 
-    <ul class="hidden md:flex items-center gap-8 text-sm" role="list">
-      <li><a href="index.html#services" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='services'?'on !text-zinc-900 dark:!text-white':''">Home</a></li>
-      <li><a href="about.html"   class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='about'?'on !text-zinc-900 dark:!text-white':''">About</a></li>
-      <li><a href="blogmenu.html"    class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='blog'?'on !text-zinc-900 dark:!text-white':''">Blog</a></li>
-      <li><a href="contact.html" class="nl text-zinc-500 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors" :class="s==='contact'?'on !text-zinc-900 dark:!text-white':''">Contact</a></li>
-    </ul>
+    <nav class="hidden md:flex gap-6 text-sm">
+      <a href="#home" class="hover:text-accent">Home</a>
+      <a href="#about" class="hover:text-accent">About</a>
+      <a href="#projects" class="hover:text-accent">Projects</a>
+      <a href="#contact" class="hover:text-accent">Contact</a>
+    </nav>
 
-    <div class="flex items-center gap-3">
-      <!-- dark toggle -->
-      <button @click="dark=!dark" class="w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800 hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors" :aria-label="dark?'Light mode':'Dark mode'">
-        <svg x-show="!dark" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
-        <svg x-show="dark"  class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364-6.364l-.707.707M6.343 17.657l-.707.707M17.657 17.657l-.707-.707M6.343 6.343l-.707-.707M12 8a4 4 0 100 8 4 4 0 000-8z"/></svg>
-      </button>
-      <!-- hire me -->
-      <a href="contact.html" class="hidden md:inline-flex items-center gap-2 shimmer bg-accent text-white text-sm font-medium px-5 py-2 rounded-full hover:bg-accent-light transition-colors">
-        Contact me <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
-      </a>
-      <!-- hamburger -->
-      <button @click="mm=!mm" class="md:hidden w-9 h-9 flex items-center justify-center rounded-full border border-zinc-200 dark:border-zinc-800" :aria-expanded="mm" aria-label="Toggle menu">
-        <svg x-show="!mm" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
-        <svg x-show="mm"  class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-      </button>
-    </div>
-  </nav>
-
-  <!-- mobile menu -->
-  <div x-show="mm" x-cloak
-    x-transition:enter="transition ease-out duration-200" x-transition:enter-start="opacity-0 -translate-y-2" x-transition:enter-end="opacity-100 translate-y-0"
-    x-transition:leave="transition ease-in duration-150" x-transition:leave-start="opacity-100 translate-y-0" x-transition:leave-end="opacity-0 -translate-y-2"
-    class="md:hidden bg-white dark:bg-zinc-950 border-t border-zinc-100 dark:border-zinc-900">
-    <ul class="flex flex-col px-6 py-5 gap-4 text-sm font-medium" role="list">
-       <li><a href="index.html#services" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Home</a></li>
-      <li><a href="about.html" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">About</a></li>
-      <li><a href="blogmenu.html" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Blog</a></li>
-      <li><a href="contact.html" @click="mm=false" class="block text-zinc-700 dark:text-zinc-300 hover:text-accent transition-colors">Contact</a></li>
-      <li class="pt-2 border-t border-zinc-100 dark:border-zinc-900">
-        <a href="contact.html" @click="mm=false" class="inline-flex shimmer bg-accent text-white font-medium text-sm px-5 py-2.5 rounded-full">Contact me →</a>
-      </li>
-    </ul>
   </div>
 </header>
 
-<main>
 
-<!-- ═══ CONTACT ═══ -->
-<section id="contact" class="py-24">
-  <div class="max-w-6xl mx-auto px-6">
-    <div class="bg-zinc-900 dark:bg-zinc-800 rounded-3xl p-10 md:p-16 relative overflow-hidden">
-      <div class="absolute top-0 right-0 w-64 h-64 bg-accent/20 rounded-full blur-3xl pointer-events-none" aria-hidden="true"></div>
-      <div class="absolute bottom-0 left-0 w-40 h-40 bg-accent/10 rounded-full blur-2xl pointer-events-none" aria-hidden="true"></div>
+<main class="pt-24">
 
-      <div class="relative z-10 grid md:grid-cols-2 gap-12 items-start">
+<!-- HERO -->
+<section id="home" class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
 
-        <div>
-          <p class="reveal text-xs font-medium text-accent tracking-widest uppercase mb-3">Get in touch</p>
+  <div>
+    <h2 class="text-4xl font-bold leading-tight">
+      Computer Science <span class="text-accent">Student</span>
+    </h2>
 
-          <h2 class="reveal d1 font-display font-bold text-4xl md:text-5xl text-white leading-tight mb-5">
-            Let's Connect
-          </h2>
+    <p class="mt-4 text-slate-600 leading-relaxed">
+      I am a degree student focusing on web development, software engineering fundamentals,
+      and system design. This portfolio represents my academic journey, coursework, and practical projects.
+    </p>
 
-          <p class="reveal d2 text-zinc-400 leading-relaxed mb-8">
-            I am currently a student exploring web development, UI/UX design, and web-based system development.
-This personal blog documents my learning journey, academic projects, and practical development experience throughout my studies.
-Feel free to reach out for collaboration, academic discussion, or feedback on my work.
-          </p>
-
-          <div class="reveal d3 flex flex-col gap-4">
-
-            <a href="mailto:nasrahahmad82@gmail.com" class="group flex items-center gap-3 text-zinc-400 hover:text-white transition-colors">
-              <span class="w-9 h-9 flex items-center justify-center bg-zinc-800 rounded-lg group-hover:bg-accent/20 transition-colors shrink-0">
-                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              </span>
-              <span class="text-sm">nasrahahmad82@gmail.com</span>
-            </a>
-
-          </div>
-        </div>
-
-        <div class="reveal d2">
-          <form action="#" method="POST" novalidate>
-            <div class="flex flex-col gap-4">
-
-              <div class="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label for="fname" class="block text-xs font-medium text-zinc-400 mb-1.5">Name *</label>
-                  <input type="text" id="fname" name="name" placeholder="Your Name" required autocomplete="name"
-                    class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
-                </div>
-
-                <div>
-                  <label for="femail" class="block text-xs font-medium text-zinc-400 mb-1.5">Email *</label>
-                  <input type="email" id="femail" name="email" placeholder="your@email.com" required autocomplete="email"
-                    class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
-                </div>
-              </div>
-
-              <div>
-                <label for="fsubject" class="block text-xs font-medium text-zinc-400 mb-1.5">Subject</label>
-                <input type="text" id="fsubject" name="subject" placeholder="Message subject"
-                  class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors">
-              </div>
-
-              <div>
-                <label for="fmessage" class="block text-xs font-medium text-zinc-400 mb-1.5">Message *</label>
-                <textarea id="fmessage" name="message" rows="4" placeholder="Write your message here..." required
-                  class="w-full bg-zinc-800 border border-zinc-700 text-white text-sm rounded-xl px-4 py-3 placeholder-zinc-600 focus:outline-none focus:border-accent transition-colors resize-none"></textarea>
-              </div>
-
-              <button type="submit" class="shimmer w-full bg-accent text-white font-display font-bold text-sm py-3.5 rounded-xl hover:bg-accent-light transition-colors">
-                Send message →
-              </button>
-
-            </div>
-          </form>
-        </div>
-
-      </div>
+    <div class="mt-6 flex gap-3">
+      <a href="#contact" class="bg-accent text-white px-5 py-2 rounded-lg">Contact</a>
+      <a href="#projects" class="border border-slate-300 px-5 py-2 rounded-lg">View Projects</a>
     </div>
   </div>
+
+  <div class="bg-white p-6 rounded-2xl border shadow-sm">
+    <p class="text-sm text-slate-500">Academic Focus</p>
+    <ul class="mt-3 space-y-2 text-sm">
+      <li>✔ Web Development (HTML, CSS, JS, PHP)</li>
+      <li>✔ System Analysis & Design</li>
+      <li>✔ Database Management</li>
+      <li>✔ UI/UX Fundamentals</li>
+    </ul>
+  </div>
+
+</section>
+
+
+<!-- ABOUT -->
+<section id="about" class="max-w-6xl mx-auto px-6 py-16">
+
+  <h3 class="text-2xl font-bold mb-6">About Me</h3>
+
+  <div class="grid md:grid-cols-2 gap-10">
+
+    <div class="text-slate-600 leading-relaxed">
+      I am currently pursuing a degree in Information Technology / Computer Science.
+      My focus is to improve my skills in building structured, scalable, and user-friendly web systems.
+      I enjoy learning through assignments, mini projects, and real system development using modern frameworks.
+    </div>
+
+    <div class="bg-white border rounded-xl p-6">
+      <h4 class="font-semibold mb-3">Technical Skills</h4>
+      <div class="flex flex-wrap gap-2 text-sm">
+        <span class="px-3 py-1 bg-slate-100 rounded-full">HTML</span>
+        <span class="px-3 py-1 bg-slate-100 rounded-full">CSS</span>
+        <span class="px-3 py-1 bg-slate-100 rounded-full">JavaScript</span>
+        <span class="px-3 py-1 bg-slate-100 rounded-full">PHP</span>
+        <span class="px-3 py-1 bg-slate-100 rounded-full">MySQL</span>
+        <span class="px-3 py-1 bg-slate-100 rounded-full">CodeIgniter</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- PROJECTS -->
+<section id="projects" class="max-w-6xl mx-auto px-6 py-16">
+
+  <h3 class="text-2xl font-bold mb-6">Academic Projects</h3>
+
+  <div class="grid md:grid-cols-3 gap-6">
+
+    <div class="bg-white border rounded-xl p-5">
+      <h4 class="font-semibold">MediPickup System</h4>
+      <p class="text-sm text-slate-600 mt-2">
+        Web-based medication appointment system using PHP & CodeIgniter.
+      </p>
+    </div>
+
+    <div class="bg-white border rounded-xl p-5">
+      <h4 class="font-semibold">Food Ordering System</h4>
+      <p class="text-sm text-slate-600 mt-2">
+        System design project focusing on CRUD and database structure.
+      </p>
+    </div>
+
+    <div class="bg-white border rounded-xl p-5">
+      <h4 class="font-semibold">Blog Portfolio Website</h4>
+      <p class="text-sm text-slate-600 mt-2">
+        Personal academic portfolio with responsive UI design.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CONTACT -->
+<section id="contact" class="max-w-6xl mx-auto px-6 py-16"
+  x-data="{ success:false }">
+
+  <h3 class="text-2xl font-bold mb-6">Contact Me</h3>
+
+  <div class="grid md:grid-cols-2 gap-10">
+
+    <div>
+      <p class="text-slate-600 leading-relaxed">
+        For academic collaboration, project discussion, or feedback on my work,
+        feel free to reach out using the form or email provided.
+      </p>
+
+      <p class="mt-4 text-sm text-slate-500">
+        Email: student@example.com
+      </p>
+    </div>
+
+    <div class="bg-white border rounded-xl p-6">
+
+      <form @submit.prevent="success=true" class="space-y-4">
+
+        <template x-if="success">
+          <div class="p-3 bg-green-100 text-green-700 rounded-lg text-sm">
+            Message successfully submitted (demo mode).
+          </div>
+        </template>
+
+        <input type="text" placeholder="Name"
+          class="w-full border rounded-lg px-3 py-2">
+
+        <input type="email" placeholder="Email"
+          class="w-full border rounded-lg px-3 py-2">
+
+        <textarea placeholder="Message"
+          class="w-full border rounded-lg px-3 py-2"></textarea>
+
+        <button class="w-full bg-accent text-white py-2 rounded-lg">
+          Send Message
+        </button>
+
+      </form>
+
+    </div>
+
+  </div>
+
 </section>
 
 </main>
 
-<footer class="border-t border-zinc-100 dark:border-zinc-900">
-  <div class="max-w-6xl mx-auto px-6 py-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-    <p class="text-sm text-zinc-400">© <span id="yr"></span> MissKantisa. All rights reserved.</p>
-  </div>
+<!-- FOOTER -->
+<footer class="border-t mt-16 py-6 text-center text-sm text-slate-500">
+  © 2026 Student Portfolio. Academic Project.
 </footer>
+
+<script>
+function contactApp(){
+  return {
+    dark:false
+  }
+}
+</script>
 
 </body>
 </html>
