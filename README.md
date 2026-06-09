@@ -1,6 +1,8 @@
+```md
 # Personal Blog Portfolio
 
 ## Description
+
 This project is a personal blog website developed as part of a web development assignment. The purpose of this project is to demonstrate understanding of basic front-end development, UI/UX design, and responsive web design.
 
 The website allows users to view blog posts, read full articles, and navigate through different sections such as Home, About, Blog, and Contact. It is designed with a clean and modern interface to improve user experience.
@@ -8,6 +10,7 @@ The website allows users to view blog posts, read full articles, and navigate th
 ---
 
 ## Features
+
 - Home page with personal introduction
 - About page describing background and learning journey
 - Blog page with 2–3 sample blog posts
@@ -20,12 +23,14 @@ The website allows users to view blog posts, read full articles, and navigate th
 ---
 
 ## Technologies Used
-- HTML
-- CSS
+
+- HTML5
+- CSS3
 - Tailwind CSS
-- JavaScript (basic interactions such as dark mode / animation)
+- JavaScript
 - Visual Studio Code
-- Git & GitHub for version control
+- Git
+- GitHub
 
 ---
 
@@ -40,10 +45,12 @@ The website allows users to view blog posts, read full articles, and navigate th
 ### Blog Page
 ![Blog Page](images/blog.png)
 
-### Blog Article Page
-![Article Page](images/blog1.png)
-![Article Page](images/blog2.png)
-![Article Page](images/blog3.png)
+### Blog Article Pages
+![Blog Article 1](images/blog1.png)
+
+![Blog Article 2](images/blog2.png)
+
+![Blog Article 3](images/blog3.png)
 
 ### Contact Page
 ![Contact Page](images/contact.png)
@@ -53,9 +60,40 @@ The website allows users to view blog posts, read full articles, and navigate th
 ## How to Run the Project
 
 1. Clone this repository:
-```bash
-git clone https://mkantisa.github.io/portfolio-kantisa/
+
+git clone https://github.com/mkantisa/portfolio-kantisa.git
+
+2. Open the project folder.
+
+3. Open `index.html` in any web browser.
+
+No additional installation is required because this is a static website project.
 
 ---
 
 ## Demo Link
+
+Live Website:  
+https://mkantisa.github.io/portfolio-kantisa/
+
+---
+
+## Repository Link
+
+GitHub Repository:  
+https://github.com/mkantisa/portfolio-kantisa
+
+---
+
+## Author
+
+Miss Kantisa
+
+Student Developer
+
+---
+
+## Note
+
+This project was developed for academic purposes as part of the CSD34203 Special Topics in Software Development course. The project demonstrates understanding of front-end web development, responsive design, GitHub version control, and the software development process through planning, implementation, testing, and documentation.
+```
