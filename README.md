@@ -41,7 +41,9 @@ The website allows users to view blog posts, read full articles, and navigate th
 ![Blog Page](images/blog.png)
 
 ### Blog Article Page
-![Article Page](images/article.png)
+![Article Page](images/blog1.png)
+![Article Page](images/blog2.png)
+![Article Page](images/blog3.png)
 
 ### Contact Page
 ![Contact Page](images/contact.png)
