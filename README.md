@@ -1,4 +1,3 @@
-```md
 # Personal Blog Portfolio
 
 ## Description
